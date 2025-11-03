@@ -120,7 +120,7 @@ export default function CatalogSection({ lang }: { lang: string }) {
                         mt-20 lg:mt-0
                         "
                     >
-                        Catalog
+                        Cat.
                     </motion.h1>
 
                     <motion.div variants={fadeUp} className="hidden sm:flex mt-7">

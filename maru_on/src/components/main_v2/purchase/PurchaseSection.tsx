@@ -120,7 +120,7 @@ export default function PurchaseSection() {
                                 </motion.div>
 
                                 {/* 구매 버튼 */}
-                                <motion.div variants={fadeUp} className="w-full flex justify-center sm:justify-start z-20">
+                                <motion.div variants={fadeUp} className="w-full flex justify-center sm:justify-start z-20 lg:mt-5">
                                     <a
                                         href={purchaseLink}
                                         target="_blank"
@@ -192,6 +192,7 @@ export default function PurchaseSection() {
                         relative                         
                         lg:w-1/2 lg:h-full w-full h-1/2
                         select-none
+                        xl:mb-20 lg:mb-15
                         //border border-red-500
                     "
                     role="img"

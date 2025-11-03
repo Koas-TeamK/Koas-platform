@@ -9,10 +9,6 @@ export default function MaruonSerialPage() {
     usePageTheme("#403736");
     const { name, serial, token } = useMemo(() => parseNameSerialToken(), []);
     const { i18n } = useTranslation("common");
-    const API_BASE =
-        import.meta.env.PROD
-            ? ""
-            : (import.meta.env.VITE_API_BASE as string) ?? "http://localhost:8080";
 
     const [serialNum, setSerialNum] = useState<string | number | null>(null);
     const [date, setDate] = useState<string | number | null>(null);
@@ -22,7 +18,7 @@ export default function MaruonSerialPage() {
         (async () => {
             try {
                 const qs = new URLSearchParams({ name, serial, token }).toString();
-                const url = `${API_BASE}/api/qr/check?${qs}`;
+                const url = `http://13.211.211.70:8080/api/qr/check?${qs}`;
                 const res = await fetch(url, { headers: { Accept: "application/json" } });
                 if (!res.ok) return;
                 const json = await res.json();
@@ -33,7 +29,7 @@ export default function MaruonSerialPage() {
                 // noop
             }
         })();
-    }, [API_BASE, name, serial, token]);
+    }, [name, serial, token]);
 
     function formatSerialKeepZeros(v: string | number | null | undefined) {
         if (v == null) return "—";
