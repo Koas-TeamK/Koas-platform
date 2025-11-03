@@ -10,6 +10,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import "./NewSection.css";
 import { useBodyBgWhileInView } from "@/shared/hooks/useBodyBgWhileInView";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export default function NewsSection() {
     const dispatch = useDispatch();
@@ -26,15 +27,14 @@ export default function NewsSection() {
     }, [data, loading, error, dispatch]);
 
     // 전환 타이밍
-    const DURATION = 900; // ms
+    const DURATION = 900; // ms (교차 페이드 지속시간과 유사하게 사용)
     const SHOW_MS = 5000;
 
     // 데이터/상태
     const list: NewsSummary = data ?? [];
     const [idx, setIdx] = useState(0);
 
-    // 슬라이드 제어
-    // direction: 1(다음으로 왼쪽 슬라이드) / -1(이전으로 오른쪽 슬라이드)
+    // 슬라이드 제어 (기존 값 유지)
     const [direction, setDirection] = useState<1 | -1>(1);
     const [isSliding, setIsSliding] = useState(false);
     const [noTrans, setNoTrans] = useState(false); // 리셋 시 transition 끄기
@@ -47,29 +47,23 @@ export default function NewsSection() {
     const targetIdx = direction === 1 ? nextIdx : prevIdx;
     const activeIdx = isSliding ? targetIdx : idx;
 
-    // 자동 슬라이드 타이머
+    // 자동 슬라이드 타이머 (교차 페이드 방식: 즉시 idx 갱신)
     useEffect(() => {
         if (len <= 1) return;
         const t = setTimeout(() => {
-            if (!isSliding) {
-                setDirection(1);
-                setIsSliding(true);
-            }
+            setDirection(1);
+            setIdx((v) => (len ? (v + 1) % len : 0));
         }, SHOW_MS);
         return () => clearTimeout(t);
-    }, [idx, isSliding, len]);
+    }, [idx, len]);
 
-    // 슬라이드 종료 → 인덱스 확정 + transition 없이 트랙을 초기 위치로 리셋
+    // (기존) 슬라이드 종료 로직: 보존
     useEffect(() => {
         if (!isSliding) return;
         const t = setTimeout(() => {
-            // 1) transition 잠깐 끄기
             setNoTrans(true);
-            // 2) 콘텐츠 인덱스 확정
             setIdx(targetIdx);
-            // 3) 트랙 위치 원복(기본 위치로)
             setIsSliding(false);
-            // 4) 다음 프레임에 transition 다시 켜기
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => setNoTrans(false));
             });
@@ -80,7 +74,7 @@ export default function NewsSection() {
     // 임시 이미지
     const tempImg = "/img/temp/koas.avif";
 
-    // 다음/이전 썸네일 미리 디코드(이미지 로딩으로 인한 끊김 최소화)
+    // 다음/이전 썸네일 미리 디코드
     useEffect(() => {
         const url = list[targetIdx]?.thumbnailUrl;
         if (!url) return;
@@ -118,14 +112,14 @@ export default function NewsSection() {
     const goNext = useCallback(() => {
         if (!canSlide) return;
         setDirection(1);
-        setIsSliding(true);
-    }, [canSlide]);
+        setIdx((v) => (len ? (v + 1) % len : 0)); // 교차 페이드: 즉시 갱신
+    }, [canSlide, len]);
 
     const goPrev = useCallback(() => {
         if (!canSlide) return;
         setDirection(-1);
-        setIsSliding(true);
-    }, [canSlide]);
+        setIdx((v) => (len ? (v - 1 + len) % len : 0)); // 교차 페이드: 즉시 갱신
+    }, [canSlide, len]);
 
     // 키보드 좌/우
     const cardRef = useRef<HTMLDivElement | null>(null);
@@ -140,15 +134,17 @@ export default function NewsSection() {
         return () => el.removeEventListener("keydown", onKey);
     }, [goNext, goPrev]);
 
-    // 트랙 위치: 방향에 따라 기본 위치/슬라이딩 위치 다르게
-    // direction === 1 (다음): [현재 | 타겟], 기본은 0 → 슬라이드 시 -1/2
-    // direction === -1(이전): [타겟 | 현재], 기본은 -1/2 → 슬라이드 시 0
+    // (보존) 트랙 관련 클래스 계산: 교차 페이드에서는 사용하지 않지만 삭제하지 않음
     const baseTranslate = direction === 1 ? "translate-x-0" : "-translate-x-1/2";
     const slidingTranslate = direction === 1 ? "-translate-x-1/2" : "translate-x-0";
 
-    // 패널 렌더 순서
-    const leftPanelIdx = direction === 1 ? idx : targetIdx;
-    const rightPanelIdx = direction === 1 ? targetIdx : idx;
+    // ⬇️ 왼쪽으로 사라지는 교차 페이드 variants
+    const reduce = useReducedMotion();
+    const slideFadeVariants = {
+        initial: { opacity: 0, x: reduce ? 0 : 24, filter: reduce ? "none" : "blur(1px)" }, // 오른쪽에서 살짝 등장
+        animate: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+        exit: { opacity: 0, x: reduce ? 0 : -40, filter: reduce ? "none" : "blur(1px)", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }, // ← 왼쪽으로 사라짐
+    } as const;
 
     return (
         <section className="w-full h-full flex flex-col lg:flex-row bg-[#afa49d]" ref={sectionRef}>
@@ -197,18 +193,16 @@ export default function NewsSection() {
                         ref={cardRef}
                         className="
                             relative lg:w-[100%] w-[92%]
-                            overflow-hidden
+                            overflow-hidden overflow-x-hidden [overflow:clip]
                             min-h-[260px] md:min-h-[320px] lg:min-h-[380px]
                             mb-10 lg:mb-3
                             cursor-pointer
-                            flex flex-col justify-center
+                            flex items-stretch
                             bg-white/80 rounded-md
                             px-5 py-10
                             outline-none
                             tracking-[-0.02em]
-                            shadow-lg shadow-black/50
-                            overflow-hidden
-                            overflow-x-hidden [overflow:clip]
+                            shadow-lg shadow-black/30
                         "
                         role="button"
                         tabIndex={0}
@@ -216,28 +210,31 @@ export default function NewsSection() {
                         onKeyDown={(e) => {
                             if (e.key === "Enter") goDetail(list[activeIdx]?.link);
                         }}
+                        data-base-translate={baseTranslate}   // 보존용(미사용 경고 회피)
+                        data-sliding-translate={slidingTranslate}
+                        data-no-trans={noTrans ? "1" : "0"}
                     >
-                        {/* 트랙(200%) */}
-                        <div
-                            className={[
-                                "flex w-[200%] will-change-transform transform-gpu ",
-                                "-mx-3 md:-mx-5",
-                                noTrans
-                                    ? "transition-none"
-                                    : "transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
-                                isSliding ? slidingTranslate : baseTranslate,
-                            ].join(" ")}
-                        >
-                            {/* 왼쪽 패널 */}
-                            <Panel
-                                item={list[leftPanelIdx]}
-                                tempImg={tempImg}
-                            />
-                            {/* 오른쪽 패널 */}
-                            <Panel
-                                item={list[rightPanelIdx]}
-                                tempImg={tempImg}
-                            />
+                        {/* 교차 페이드 레이어: 들어오고(오른쪽→센터), 나갈 때 왼쪽으로 사라짐 */}
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeIdx}
+                                variants={slideFadeVariants}
+                                initial="initial"
+                                animate="animate"
+                                exit="exit"
+                                className="absolute inset-0"
+                                style={{ willChange: "opacity, transform" }}
+                            >
+                                <Panel
+                                    item={list[activeIdx]}
+                                    tempImg={tempImg}
+                                />
+                            </motion.div>
+                        </AnimatePresence>
+
+                        {/* 높이 유지용 보이지 않는 레이어 (키보드 포커스 등 레이아웃 안정) */}
+                        <div className="invisible">
+                            <Panel item={list[activeIdx]} tempImg={tempImg} />
                         </div>
 
                         {/* ← → 화살표 (접근성 + 모바일 탭 영역 넉넉히) */}
@@ -288,10 +285,10 @@ export default function NewsSection() {
 
 function Panel({ item, tempImg }: { item: NewsSummary[number] | undefined, tempImg: string }) {
     return (
-        <div className="w-1/2 px-3 md:px-5">
+        <div className="w-full h-full px-10 py-10">
             <article
                 className="
-                    grid min-w-0 grid-rows-[auto_auto_auto] gap-4
+                    grid min-w-0 grid-rows-[auto_auto_auto] 
                     justify-items-center text-center
                     lg:justify-items-start lg:text-left
                     h-full

@@ -27,7 +27,7 @@ function* handleNewsSummaryRequest() {
         const res: { data: any } = yield call(fetchNewsSummaryApi);
 
         // 1) 원본 응답 로그
-        console.log("[뉴스 요약 응답 원본]", res.data);
+        //console.log("[뉴스 요약 응답 원본]", res.data);
 
         // 2) 방어적 정규화(배열이 아닐 수도 있음)
         const raw = Array.isArray(res.data)
@@ -36,7 +36,7 @@ function* handleNewsSummaryRequest() {
                 ? res.data.content
                 : [];
 
-        console.log("[뉴스 요약 정규화 전 길이]", raw.length, raw);
+        //console.log("[뉴스 요약 정규화 전 길이]", raw.length, raw);
 
         // 3) 프론트 타입(NewsSummaryItem)에 맞게 매핑
         const list: NewsSummary = raw.map((item: any) => ({
@@ -50,7 +50,7 @@ function* handleNewsSummaryRequest() {
         }));
 
         // 4) 최종 결과 로그
-        console.log("[뉴스 요약 최종 매핑]", list);
+        //console.log("[뉴스 요약 최종 매핑]", list);
 
         yield put(newsSummarySuccess(list));
     } catch (err: any) {
@@ -68,10 +68,10 @@ function* handleNewsDetailRequest(action: ReturnType<typeof newsDetailRequest>) 
     const id = action.payload;
     try {
         const res: { data: NewsDetail } = yield call(fetchNewsDetailApi, id);
-        console.log("[뉴스 상세 응답]", res.data);
+        //console.log("[뉴스 상세 응답]", res.data);
         yield put(newsDetailSuccess({ id, data: res.data }));
     } catch (err: any) {
-        console.error("[뉴스 상세 오류]", err);
+        //console.error("[뉴스 상세 오류]", err);
         yield put(newsDetailFailure({ id, error: err?.message || "오류" }));
     }
 }
