@@ -211,8 +211,9 @@ export default function PurchaseSection() {
                                 exit="exit"
                                 className="
                                 absolute left-1/2 -translate-x-1/2 
-                                bottom-15 sm:bottom-19 md:bottom-22 lg:bottom-23 xl:bottom-25 2xl:bottom-27
-                                2xl:w-[38rem] xl:w-[30rem] lg:w-[29rem] md:w-[27rem] sm:w-[24rem] w-[15rem] h-auto
+                                bottom-15 sm:bottom-19 md:bottom-22 lg:bottom-23 xl:bottom-25 2xl:bottom-30
+                                2xl:w-[38rem] xl:w-[30rem] lg:w-[29rem] md:w-[27rem] sm:w-[24rem] w-[16rem] h-auto
+                                //border border-blue-500
                                 "
                                 draggable={false}
                             />
@@ -228,7 +229,7 @@ export default function PurchaseSection() {
                                 exit="exit"
                                 className="
                                 absolute left-1/2 -translate-x-1/2 
-                                bottom-14 sm:bottom-18 md:bottom-20 lg:bottom-22 xl:bottom-24 2xl:bottom-26
+                                bottom-15 sm:bottom-19 md:bottom-22 lg:bottom-23 xl:bottom-25 2xl:bottom-30
                                 2xl:w-[38rem] xl:w-[32rem] lg:w-[29rem] md:w-[27rem] sm:w-[24rem] w-[15rem] h-auto
                                 "
                                 draggable={false}
@@ -238,7 +239,7 @@ export default function PurchaseSection() {
 
                     {/* 전환 컨트롤: 화살표 + 점 (미니멀) */}
                     <div className="absolute left-1/2 -translate-x-1/2 mt-
-                    bottom-4 sm:bottom-8 md:bottom-10 lg:bottom-12 xl:bottom-14 2xl:bottom-16
+                    bottom-2 sm:bottom-8 md:bottom-10 lg:bottom-12 xl:bottom-12 2xl:bottom-16
                     flex items-center gap-3 sm:gap-4
                     //border border-black">
                         {/* prev */}
@@ -252,7 +253,7 @@ export default function PurchaseSection() {
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#403736]/40
                             "
                         >
-                            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
@@ -265,7 +266,7 @@ export default function PurchaseSection() {
                                 aria-pressed={variant === "high"}
                                 aria-label="Show high-back"
                                 className={`
-                                h-2.5 w-2.5 rounded-full
+                                h-3 w-3 rounded-full
                                 ${variant === "high" ? "bg-[#403736]" : "bg-black/30"}
                                 ring-1 ring-black/10
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#403736]/40
@@ -277,7 +278,7 @@ export default function PurchaseSection() {
                                 aria-pressed={variant === "mid"}
                                 aria-label="Show mid-back"
                                 className={`
-                                h-2.5 w-2.5 rounded-full
+                                h-3 w-3 rounded-full
                                 ${variant === "mid" ? "bg-[#403736]" : "bg-black/30"}
                                 ring-1 ring-black/10
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#403736]/40
@@ -296,7 +297,7 @@ export default function PurchaseSection() {
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#403736]/40
                             "
                         >
-                            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                             </svg>
                         </button>

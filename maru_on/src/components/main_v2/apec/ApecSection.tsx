@@ -80,14 +80,18 @@ export default function ApecSection({ lang }: { lang: string }) {
         "
             >
                 {/* 왼쪽: 문구 이미지 — lg 미만에서 화면 정중앙 */}
-                <div className="w-full h-full grid place-items-center">
+                <div className="w-full min-h-dvh grid place-items-center">
                     <div
                         className="
-              w-full
-              2xl:w-[60rem] lg:w-[50rem] md:w-[40rem] sm:w-[30rem]
-              aspect-[16/9]
-              bg-no-repeat bg-contain bg-center
-            "
+                        aspect-[16/9]
+                        bg-no-repeat bg-contain
+                         w-[min(130vw,40rem)]         /* 모바일: 화면 폭의 130%까지 크게 */
+                        sm:w-[min(92vw,44rem)]
+                        md:w-[min(90vw,48rem)]
+                        lg:w-[50rem]
+                        2xl:w-[60rem]
+                        bg-[position:20%_50%] sm:bg-[position:50%_50%] lg:bg-center
+                        "
                         style={{ backgroundImage: `url("${imgSrc}")` }}
                         aria-label="APEC Slogan"
                     />

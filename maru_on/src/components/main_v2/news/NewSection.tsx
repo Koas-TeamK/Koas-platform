@@ -159,8 +159,9 @@ export default function NewsSection() {
                 w-full lg:w-1/2 h-full
                 flex flex-col items-center justify-center lg:items-start lg:justify-center 
                 lg:pl-20 gap-y-4
-                mt-10 lg:mt-0
+                mt-15 lg:mt-0
                 text-[#403736]
+                //border border-red-500
             ">
                 <div className="
                     2xl:text-8xl xl:text-7xl lg:text-6xl md:text-5xl text-3xl
@@ -291,7 +292,7 @@ export default function NewsSection() {
 
 function Panel({ item, tempImg }: { item: NewsSummary[number] | undefined, tempImg: string }) {
     return (
-        <div className="w-full h-full px-10 py-10">
+        <div className="w-full h-full px-10 pt-5 pb-3">
             <article
                 className="
                     grid min-w-0 grid-rows-[auto_auto_auto] 
