@@ -2,8 +2,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "@/shared/ui/AppLayout";
 import AppLayout_QR from "@/shared/ui/AppLayout_QR";
-import MainPage from "@/pages/MainPage";
-import MaruonSerialPage from "@/pages/MaruonSerialPage";
+import MainPage from "@/pages/main/MainPage";
+import MaruonSerialPage from "@/pages/serial/MaruonSerialPage";
 
 export default function AppRoutes() {
     return (

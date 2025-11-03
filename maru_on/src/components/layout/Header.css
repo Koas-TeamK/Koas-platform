@@ -1,0 +1,346 @@
+/* Header.css */
+/* From Uiverse.io by chase2k25 */
+.glass-radio-group {
+    --c: 64, 55, 54;
+    --bg: rgba(var(--c), 0.14);
+    --text: #403736;
+    --edge-light: rgba(255, 255, 255, .22);
+    --edge-dark: rgba(0, 0, 0, .35);
+
+    display: flex;
+    /* 라벨들을 가로 정렬 */
+    position: relative;
+    /* 내부 glider의 absolute 기준 */
+    background: var(--bg);
+    /* 반투명 배경 */
+    border-radius: 1rem;
+    backdrop-filter: blur(12px);
+    /* 유리 느낌 핵심 */
+    box-shadow:
+        inset 1px 1px 4px rgba(255, 255, 255, 0.32),
+        /* 안쪽 하이라이트 */
+        inset -1px -1px 6px rgba(0, 0, 0, .3),
+        /* 안쪽 그림자 */
+        0 4px 12px rgba(0, 0, 0, .15);
+    /* 바깥 그림자 */
+    overflow: hidden;
+    /* 둥근 모서리 안으로 클리핑 */
+    width: fit-content;
+    /* 내용 너비만큼 */
+}
+
+/* ===== APEC 전용 (하얗고 투명한 유리) ===== */
+.glass-radio-group.apec {
+    --c: 255, 255, 255;
+    --bg: rgba(var(--c), 0.08);
+    --text: rgba(255, 255, 255, 0.9);
+    --edge-light: rgba(255, 255, 255, .4);
+    --edge-dark: rgba(0, 0, 0, .4);
+}
+
+.glass-radio-group input {
+    display: none;
+
+    /* Header.css — Liquid Glass version (same color tone) */
+    .glass-radio-group {
+        /* 색 변수: #403736 = rgb(64, 55, 54) */
+        --c: 64, 55, 54;
+        --bg: rgba(var(--c), .14);
+        /* 유리 안쪽 베이스 */
+        --text: #e5e5e5;
+        --edge-light: rgba(255, 255, 255, .22);
+        --edge-dark: rgba(0, 0, 0, .35);
+
+        position: relative;
+        display: inline-flex;
+        /* fit-content 대체 */
+        align-items: center;
+        gap: 0;
+        padding: 6px;
+        /* 안쪽 여백 조금 */
+        border-radius: 16px;
+
+        /* 유리감 */
+        background:
+            linear-gradient(145deg,
+                rgba(var(--c), .22) 0%,
+                rgba(var(--c), .10) 100%);
+        backdrop-filter: blur(14px) saturate(140%);
+        -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+        /* 리퀴드 느낌의 내/외곽 그림자 (쉼표 필수) */
+        box-shadow:
+            inset 1px 1px 1.5px var(--edge-light),
+            inset -2px -2px 4px var(--edge-dark),
+            0 4px 12px rgba(0, 0, 0, .20),
+            0 8px 24px rgba(0, 0, 0, .22);
+
+        /* 유리 가장자리 미세 보더 */
+        border: 1px solid rgba(255, 255, 255, 0.041);
+        outline: 1px solid rgba(0, 0, 0, .18);
+
+        overflow: hidden;
+    }
+
+    .glass-radio-group input {
+        /* display:none 대신 접근성 유지 */
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .glass-radio-group label {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 96px;
+        /* 버튼 폭 살짝 키움 */
+        padding: .8rem 1.6rem;
+        cursor: pointer;
+
+        color: var(--text);
+        font-weight: 700;
+        letter-spacing: .3px;
+        font-size: 14px;
+
+        position: relative;
+        z-index: 2;
+        transition: color .28s ease;
+    }
+
+    .glass-radio-group label:hover {
+        color: #fff;
+    }
+
+    .glass-radio-group input:checked+label {
+        color: #fff;
+    }
+
+    /* 글라이더: 유리+유광 오버레이 */
+    .glass-glider {
+        position: absolute;
+        top: 6px;
+        bottom: 6px;
+        /* 패딩만큼 inset */
+        left: 6px;
+        width: calc(100%/3 - 12px);
+        /* 좌우 패딩 보정 */
+        border-radius: 12px;
+        z-index: 1;
+
+        /* 유리 몸통 */
+        background:
+            linear-gradient(135deg,
+                rgba(var(--c), .65) 0%,
+                rgba(var(--c), .85) 100%);
+
+        /* 입체감 그림자 (쉼표로 분리) */
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, .25),
+            inset 0 -1px 1.5px rgba(0, 0, 0, .35),
+            0 8px 24px rgba(0, 0, 0, .28);
+
+        /* 애니메이션을 transform으로 (부드럽게) */
+        transition:
+            transform .45s cubic-bezier(.2, .8, .2, 1),
+            background .35s ease,
+            box-shadow .35s ease;
+        will-change: transform, background;
+    }
+
+    /* 유광 하이라이트(유리 반사) */
+    .glass-glider::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        background:
+            linear-gradient(to bottom,
+                rgba(255, 255, 255, .35) 0%,
+                rgba(255, 255, 255, .10) 40%,
+                rgba(255, 255, 255, 0) 60%);
+
+        mix-blend-mode: screen;
+        /* 반사 강조 */
+        opacity: .9;
+    }
+
+    /* (옵션) 상단 스팟 반사 */
+    .glass-glider::after {
+        content: "";
+        position: absolute;
+        left: -20%;
+        top: -60%;
+        width: 140%;
+        height: 200%;
+        border-radius: 50%;
+        pointer-events: none;
+        background:
+            radial-gradient(120% 60% at 30% 0%,
+                rgba(255, 255, 255, .28),
+                transparent 60%);
+        mix-blend-mode: screen;
+        opacity: .35;
+        transition: opacity .35s ease;
+    }
+
+    /* 체크 이동 (섀도/배경 톤 유지: 같은 색 계열) */
+    #glass-silver:checked~.glass-glider {
+        transform: translateX(0%);
+    }
+
+    #glass-gold:checked~.glass-glider {
+        transform: translateX(100%);
+    }
+
+    #glass-platinum:checked~.glass-glider {
+        transform: translateX(200%);
+    }
+
+    /* 호버 시 반짝임 조금 강화(선택) */
+    .glass-radio-group:hover .glass-glider::after {
+        opacity: .45;
+    }
+
+}
+
+.glass-radio-group label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    font-size: 14px;
+    padding: 0.8rem 1.6rem;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--text);
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease-in-out;
+}
+
+.glass-radio-group label:hover {
+    color: white;
+}
+
+.glass-radio-group input:checked+label {
+    color: #fff;
+}
+
+.glass-glider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc(100% / 3);
+    border-radius: 1rem;
+    z-index: 1;
+    transition:
+        transform 0.5s cubic-bezier(0.37, 1.95, 0.66, 0.56),
+        background 0.4s ease-in-out,
+        box-shadow 0.4s ease-in-out;
+}
+
+/* Silver */
+#glass-silver:checked~.glass-glider {
+    transform: translateX(0%);
+    background: linear-gradient(135deg, #5c5351, #403736);
+    box-shadow:
+        0 0 18px rgba(64, 55, 54, 0.5), 0 0 10px rgba(64, 55, 54, 0.4) inset;
+}
+
+/* Gold */
+#glass-gold:checked~.glass-glider {
+    transform: translateX(100%);
+    background: linear-gradient(135deg, #5c5351, #403736);
+    box-shadow:
+        0 0 18px rgba(64, 55, 54, 0.5), 0 0 10px rgba(64, 55, 54, 0.4) inset;
+}
+
+/* Platinum */
+#glass-platinum:checked~.glass-glider {
+    transform: translateX(200%);
+    background: linear-gradient(135deg, #5c5351, #403736);
+    box-shadow:
+        0 0 18px rgba(64, 55, 54, 0.5), 0 0 10px rgba(64, 55, 54, 0.4) inset;
+}
+
+/* ===========================
+   🌿 APEC 전용 — 더 투명한 글라스
+   =========================== */
+.glass-radio-group.apec {
+    /* 베이스 톤: 거의 투명한 화이트 */
+    --c: 255, 255, 255;
+    --bg: rgba(var(--c), 0.06);
+    /* 배경 투명도 ↑ */
+    --text: rgba(255, 255, 255, 0.92);
+    --edge-light: rgba(255, 255, 255, 0.35);
+    --edge-dark: rgba(0, 0, 0, 0.28);
+
+    /* 유리 바디: 더 옅게, 더 투명하게 */
+    background:
+        linear-gradient(145deg,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.04) 100%);
+    backdrop-filter: blur(18px) saturate(170%);
+    /* blur ↑, 채도 ↑ */
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    /* 테두리도 옅게 */
+    box-shadow:
+        inset 1px 1px 1px var(--edge-light),
+        inset -2px -2px 3px var(--edge-dark),
+        0 6px 18px rgba(0, 0, 0, 0.12);
+    /* 외곽 그림자 약화 */
+}
+
+/* 라벨 텍스트: 평소 살짝 반투명 → hover/checked 때 선명 */
+.glass-radio-group.apec label {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.glass-radio-group.apec label:hover,
+.glass-radio-group.apec input:checked+label {
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
+}
+
+/* 글라이더: 완전한 흰 박스 대신 반투명 유리판 느낌 */
+.glass-radio-group.apec #glass-silver:checked~.glass-glider,
+.glass-radio-group.apec #glass-gold:checked~.glass-glider,
+.glass-radio-group.apec #glass-platinum:checked~.glass-glider {
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.42) 0%,
+            rgba(255, 255, 255, 0.22) 100%);
+    /* 본체 투명 */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.22),
+        0 10px 28px rgba(0, 0, 0, 0.12),
+        0 0 24px rgba(255, 255, 255, 0.18);
+    /* 은은한 광택 */
+}
+
+/* 유광 하이라이트(반사)도 약하게 → 유리 표면만 살짝 반짝 */
+.glass-radio-group.apec .glass-glider::before {
+    background:
+        linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.30) 0%,
+            rgba(255, 255, 255, 0.10) 40%,
+            rgba(255, 255, 255, 0.00) 60%);
+    opacity: .8;
+}
+
+.glass-radio-group.apec .glass-glider::after {
+    opacity: .28;
+    /* 스팟 반사 약화 */
+}
+
+.glass-radio-group.apec:hover .glass-glider::after {
+    opacity: .38;
+    /* 호버 시만 살짝 ↑ */
+}

@@ -1,7 +1,9 @@
 {
     "catalog": {
         "section": "Catalog Section",
-        "open": "View Catalog"
+        "open": "View Catalog",
+        "descM": "The essence of Maruon, at a glance.",
+        "desc": "Discover Maruon at a glance with our official catalog. <br /> Experience the harmony of comfort, sustainability, and design."
     },
     "apec": {
         "section": "Apec Section",
@@ -23,7 +25,22 @@
         }
     },
     "edition": {
-        "registeredLine": "Registered as<br/> Edition No.<num/>",
+        "registeredLine1": "Registered as<br/>",
+        "registeredLine2": "Edition No.<num/>",
         "date": "The scheduled shipping date for your product is <br /> <date/>."
+    },
+    "title": {
+        "title": "MARUON",
+        "slogan": "Where Sophistication Takes Its Place",
+        "desc1": "Ergonomic <strong>S-Line backrest</strong> designed to support the natural curve of the spine.",
+        "desc2": "A refined armrest combining sleek curves with <strong>eco-friendly leather</strong> for lasting comfort.",
+        "desc3": "Smooth <strong>knee-tilt mechanism</strong> that reduces leg fatigue and enhances sitting comfort.",
+        "desc": "Ergonomic Knee Tilt (20°)<br /> A gentle synchronized motion between the seat and backrest minimizes knee strain, offering smooth, enduring comfort for long hours of sitting.",
+        "descM": "Where elegance resides, grace reveals itself.",
+        "buy": "Buy Now"
+    },
+    "news": {
+        "desc": "KOAS’s journey toward better spaces continues.",
+        "button": "View More"
     }
 }

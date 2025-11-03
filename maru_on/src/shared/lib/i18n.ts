@@ -10,7 +10,7 @@ i18n
     .use(initReactI18next)     // react-i18next 연결
     .init({
         fallbackLng: "ko",
-        supportedLngs: ["ko", "en"],
+        supportedLngs: ["ko", "en", "zh"],
         ns: ["common"],
         defaultNS: "common",
         load: "languageOnly",

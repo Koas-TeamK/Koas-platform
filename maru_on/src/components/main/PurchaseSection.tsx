@@ -6,14 +6,14 @@ export default function PurchaseSection() {
         <section className="flex m-0 gap-0 w-full h-full bg-[#c8bdb6]">
             <ProductTile
                 className="relative flex-1"
-                imgSrc="/img/high-chair.png"
+                imgSrc="/img/chair/high-chair.png"
                 titleKey="purchase.high.title"
                 altKey="purchase.high.alt"
                 href="#"
             />
             <ProductTile
                 className="relative flex-1"
-                imgSrc="/img/mid-chair.png"
+                imgSrc="/img/chair/mid-chair.png"
                 titleKey="purchase.middle.title"
                 altKey="purchase.middle.alt"
                 href="#"

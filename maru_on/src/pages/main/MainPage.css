@@ -1,0 +1,13 @@
+/* MainPage.module.css */
+.hide-scrollbar {
+    /* Firefox */
+    scrollbar-width: none;
+    /* IE/Edge(레거시) */
+    -ms-overflow-style: none;
+}
+
+/* Chrome, Safari, Edge(Chromium) */
+.hide-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}

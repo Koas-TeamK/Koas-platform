@@ -1,22 +1,49 @@
 // components/layout/Header.tsx
 import { LanguageIcon } from "@heroicons/react/24/solid";
-import Menu from "@/components/menu/Menu";
+//import Menu from "@/components/menu/Menu";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function Header_qr() {
-    const [menuOpen, setMenuOpen] = useState(false);
+    //const [menuOpen, setMenuOpen] = useState(false);
     const [langHint, setLangHint] = useState<string | null>(null); // 배지 텍스트
     const { i18n, t } = useTranslation();
 
-    const toggleLang = async () => {
-        const next = i18n.language.startsWith("ko") ? "en" : "ko";
-        await i18n.changeLanguage(next);
-        // html lang도 갱신(접근성/SEO에 도움)
-        document.documentElement.lang = next;
+    // 지원 언어 순서와 배지 표기
+    const LANG_ORDER = ["ko", "en", "zh"] as const;
+    const LANG_LABEL: Record<string, string> = {
+        ko: "한국어",
+        en: "English",
+        zh: "中文",
+    };
 
-        // 배지 텍스트 표시
-        setLangHint(next === "ko" ? "한국어" : "English");
+    // html lang 속성 표준화(중국어는 보통 zh-CN로 표기)
+    function toHtmlLang(lng: string) {
+        if (lng.startsWith("zh")) return "zh-CN";
+        if (lng.startsWith("en")) return "en";
+        if (lng.startsWith("ko")) return "ko";
+        return lng;
+    }
+
+    const toggleLang = async () => {
+        const cur = i18n.language || "en";
+        const idx = LANG_ORDER.findIndex((l) => cur.startsWith(l));
+        const next = LANG_ORDER[(idx + 1) % LANG_ORDER.length];
+
+        // i18next 변경
+        await i18n.changeLanguage(next);
+
+        // html lang (접근성/SEO)
+        document.documentElement.lang = toHtmlLang(next);
+
+        // 배지 텍스트
+        setLangHint(LANG_LABEL[next] ?? "");
+
+        // 다음 방문에서도 유지하고 싶으면(선택):
+        try {
+            localStorage.setItem("i18nextLng", next);
+        } catch { }
+
         // 1.2초 뒤 숨김
         window.setTimeout(() => setLangHint(null), 1200);
     };
@@ -63,7 +90,7 @@ export default function Header_qr() {
                 {langHint ? `언어가 ${langHint}로 변경되었습니다.` : ""}
             </div>
 
-            <Menu open={menuOpen} onClose={() => setMenuOpen(false)} />
+            {/* <Menu open={menuOpen} onClose={() => setMenuOpen(false)} /> */}
         </header>
     );
 }

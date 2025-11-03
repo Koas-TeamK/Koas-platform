@@ -1,8 +1,9 @@
 // ApecSection.tsx
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-export default function ApecSection() {
+export default function ApecSection({ lang }: { lang: string }) {
+    //console.log("[lang]", lang);
     const HREF = "/leaflet/apec%20leaflet.pdf";
     const { t } = useTranslation("common");
 
@@ -54,14 +55,23 @@ export default function ApecSection() {
 
     useEffect(() => () => clearHideTimer(), [clearHideTimer]);
 
+    //언어별 이미지 변경
+    const imgSrc = useMemo(() => {
+        const prefix = lang?.toLowerCase().split("-")[0] || "en";
+        const map: Record<string, "(ko)" | "(en)" | "(zh)"> = { ko: "(ko)", en: "(en)", zh: "(zh)" };
+        const suffix = map[prefix] ?? "(en)";
+        return encodeURI(`/img/apec/apec${suffix}.png`);
+    }, [lang]);
+
     return (
         <section
-            className="
-          group relative w-full h-full overflow-hidden
-          bg-[url('/img/koas-apec.png')] bg-cover bg-no-repeat
-          bg-[position:50%_50%] transition-[background-position] duration-500
-          hover:bg-[position:50%_30%] focus:bg-[position:50%_30%]
-        "
+            className={[
+                "group relative w-full h-full overflow-hidden",
+                "bg-no-repeat bg-cover",
+                "bg-[position:50%_50%] transition-[background-position] duration-500",
+                "hover:bg-[position:50%_30%] focus:bg-[position:50%_30%]"
+            ].join(" ")}
+            style={{ backgroundImage: `url("${imgSrc}")` }}  //동적 URL은 inline style로
             onMouseEnter={show}
             onMouseLeave={hide}
             onFocus={show}
@@ -71,7 +81,7 @@ export default function ApecSection() {
             <div
                 className={[
                     "absolute inset-0 pointer-events-none",
-                    "bg-[url('/img/koas-apec-hover.jpg')] bg-cover bg-center bg-no-repeat",
+                    "bg-[url('/img/koas-apec-hover.jpg')] bg-cover bg-[position:60%_50%] bg-no-repeat",
                     "opacity-0 transition-opacity duration-300",
                     revealed ? "opacity-100" : "opacity-0",
                     "md:group-hover:opacity-100",
