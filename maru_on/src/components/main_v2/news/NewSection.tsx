@@ -292,7 +292,7 @@ export default function NewsSection() {
 
 function Panel({ item, tempImg }: { item: NewsSummary[number] | undefined, tempImg: string }) {
     return (
-        <div className="w-full h-full px-10 pt-5 pb-3">
+        <div className="w-full h-full px-10 pt-5 sm:pb-5 sm:pt-10">
             <article
                 className="
                     grid min-w-0 grid-rows-[auto_auto_auto] 
