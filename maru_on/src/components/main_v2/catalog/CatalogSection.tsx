@@ -104,7 +104,7 @@ export default function CatalogSection({ lang }: { lang: string }) {
                     flex flex-col lg:w-1/2 lg:h-full text-[#403736]
                     justify-center items-center sm:items-start 
                     lg:ml-25 sm:ml-10
-                    mt-5 lg:mt-10
+                    mt-5 lg:mt-5
                     //border border-red-500
                 "
                     variants={container}
@@ -123,7 +123,7 @@ export default function CatalogSection({ lang }: { lang: string }) {
                         Catalog
                     </motion.h1>
 
-                    <motion.div variants={fadeUp} className="hidden sm:flex mt-10">
+                    <motion.div variants={fadeUp} className="hidden sm:flex mt-7">
                         <Trans ns="common" i18nKey="catalog.desc" components={{ br: <br /> }} />
                     </motion.div>
 

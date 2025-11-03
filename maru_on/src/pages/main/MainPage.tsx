@@ -4,8 +4,7 @@ import "./MainPage.css";
 import PurchaseSection from "@/components/main_v2/purchase/PurchaseSection";
 import CatalogSection from "@/components/main_v2/catalog/CatalogSection";
 import ApecSection from "@/components/main_v2/apec/ApecSection";
-//import NewsSection from "@/components/main_v2/news/NewSection";
-//import NewsDetailSection from "@/components/main_v2/news/NewDetailSection";
+import NewsSection from "@/components/main_v2/news/NewSection";
 import { motion, type Variants } from "framer-motion";
 
 // 섹션 래퍼: 섹션 들어올 때 컨텐츠가 '딱' 등장
@@ -57,6 +56,11 @@ export default function MainPage() {
             // iOS 자연 관성 유지. scrollBehavior는 빼서 스냅만 작동.
             style={{ WebkitOverflowScrolling: "touch" }}
         >
+            {/* 섹션 4 */}
+            <SnapSection>
+                <NewsSection />
+            </SnapSection>
+
             {/* 섹션 1 */}
             <SnapSection>
                 <PurchaseSection />
@@ -71,6 +75,8 @@ export default function MainPage() {
             <SnapSection>
                 <ApecSection lang={lang} />
             </SnapSection>
+
+
         </main>
     );
 }

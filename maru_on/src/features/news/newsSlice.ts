@@ -9,6 +9,7 @@ export type NewsSummaryItem = {
     thumbnailUrl: string | null;
     title: string;
     date: string;
+    link: string;
 };
 export type NewsSummary = NewsSummaryItem[];
 
