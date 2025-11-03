@@ -208,6 +208,7 @@ export default function NewsSection() {
                             tracking-[-0.02em]
                             shadow-lg shadow-black/50
                             overflow-hidden
+                            overflow-x-hidden [overflow:clip]
                         "
                         role="button"
                         tabIndex={0}
@@ -220,6 +221,7 @@ export default function NewsSection() {
                         <div
                             className={[
                                 "flex w-[200%] will-change-transform transform-gpu ",
+                                "-mx-3 md:-mx-5",
                                 noTrans
                                     ? "transition-none"
                                     : "transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
