@@ -43,6 +43,7 @@ function* handleNewsSummaryRequest() {
             id: Number(item.id ?? item.newsId ?? item.number ?? 0),
             title: String(item.title ?? ""),
             date: String(item.date ?? ""),
+            link: String(item.link ?? ""),
             thumbnailUrl:
                 item.thumbnailUrl ??
                 (Array.isArray(item.imgUrl) && item.imgUrl.length > 0 ? item.imgUrl[0] : null),
