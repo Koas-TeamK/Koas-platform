@@ -1,0 +1,145 @@
+/* === Catalog 버튼: buy-btn 스타일 이식 버전 === */
+.catalog-button {
+    /* tokens */
+    --primary-color: #403736;
+    --hovered-color: #a07c2d;
+    --dur: .35s;
+    --dur-fast: .22s;
+    --ease: cubic-bezier(.2, .8, .2, 1);
+    --shift: 4px;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1;
+
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--primary-color);
+
+    /* padding/spacing */
+    padding: 10px 40px;
+    border-radius: 8px;
+
+    -webkit-tap-highlight-color: transparent;
+    transform: translateZ(0);
+}
+
+/* 텍스트 */
+.catalog-button p {
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    color: var(--primary-color);
+    transition: color var(--dur-fast) ease;
+}
+
+/* 밑줄: 좌우 패딩(40px)에 맞춤 */
+.catalog-button::after {
+    content: "";
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: -7px;
+    height: 2px;
+    background: var(--hovered-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease);
+    will-change: transform;
+}
+
+/* 텍스트 채우기 효과 */
+.catalog-button p::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    color: var(--hovered-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease);
+    will-change: transform;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* 아이콘(선택) */
+.catalog-button svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-color);
+    transition:
+        transform var(--dur-fast) ease,
+        color var(--dur-fast) ease;
+    transition-delay: .05s;
+    flex: none;
+}
+
+/* 포커스(키보드 접근성) */
+.catalog-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--hovered-color) 35%, white);
+}
+
+/* 호버는 포인터 장치에서만 */
+@media (hover:hover) and (pointer:fine) {
+    .catalog-button:hover::after {
+        transform: scaleX(1);
+    }
+
+    .catalog-button:hover p::before {
+        transform: scaleX(1);
+    }
+
+    .catalog-button:hover p {
+        color: var(--hovered-color);
+    }
+
+    .catalog-button:hover svg {
+        transform: translateX(var(--shift));
+        color: var(--hovered-color);
+    }
+}
+
+/* 눌림 */
+.catalog-button:active {
+    transform: translateZ(0) scale(.98);
+}
+
+/* 비활성 */
+.catalog-button[aria-disabled="true"],
+.catalog-button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* 모션 최소화 */
+@media (prefers-reduced-motion: reduce) {
+
+    .catalog-button,
+    .catalog-button * {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .catalog-button:active {
+        transform: none;
+    }
+}
+
+/* 다크 모드(선택) */
+@media (prefers-color-scheme: dark) {
+    .catalog-button {
+        --primary-color: #f5f2ef;
+        border-color: #e6e0da33;
+    }
+
+    .catalog-button p {
+        color: var(--primary-color);
+    }
+}

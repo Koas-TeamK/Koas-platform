@@ -27,7 +27,7 @@ export default function CatalogSection({ lang }: { lang: string }) {
         const prefix = lang?.toLowerCase().split("-")[0] || "en";
         const map: Record<string, "(ko)" | "(en)" | "(zh)"> = { ko: "(ko)", en: "(en)", zh: "(zh)" };
         const suffix = map[prefix] ?? "(en)";
-        return encodeURI(`/img/catalog${suffix}.png`);
+        return encodeURI(`/img/catalog/catalog${suffix}.png`);
     }, [lang]);
 
     const [revealed, setRevealed] = useState(false);

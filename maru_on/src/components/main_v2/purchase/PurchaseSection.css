@@ -1,0 +1,145 @@
+/* PurchaseSection.css (keep original spacing) */
+.buy-btn {
+    /* tokens */
+    --primary-color: #403736;
+    --hovered-color: #eed49d;
+    --dur: .35s;
+    --dur-fast: .22s;
+    --ease: cubic-bezier(.2, .8, .2, 1);
+    --shift: 4px;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1;
+
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--primary-color);
+
+    /* === padding/spacing: 그대로 유지 === */
+    padding: 10px 40px;
+    border-radius: 8px;
+
+    -webkit-tap-highlight-color: transparent;
+    transform: translateZ(0);
+}
+
+/* 텍스트 */
+.buy-btn p {
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    color: var(--primary-color);
+    transition: color var(--dur-fast) ease;
+}
+
+/* 밑줄: 패딩(40px)에 맞춰 좌우 여백 정렬 */
+.buy-btn::after {
+    content: "";
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: -7px;
+    height: 2px;
+    background: var(--hovered-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease);
+    will-change: transform;
+}
+
+/* 텍스트 채우기 효과 */
+.buy-btn p::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    color: var(--hovered-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease);
+    will-change: transform;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* 아이콘 */
+.buy-btn svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-color);
+    transition:
+        transform var(--dur-fast) ease,
+        color var(--dur-fast) ease;
+    transition-delay: .05s;
+    flex: none;
+}
+
+/* 포커스(키보드) */
+.buy-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--hovered-color) 35%, white);
+}
+
+/* 호버는 포인터 장치에서만 */
+@media (hover:hover) and (pointer:fine) {
+    .buy-btn:hover::after {
+        transform: scaleX(1);
+    }
+
+    .buy-btn:hover p::before {
+        transform: scaleX(1);
+    }
+
+    .buy-btn:hover p {
+        color: var(--hovered-color);
+    }
+
+    .buy-btn:hover svg {
+        transform: translateX(var(--shift));
+        color: var(--hovered-color);
+    }
+}
+
+/* 눌림 */
+.buy-btn:active {
+    transform: translateZ(0) scale(.98);
+}
+
+/* 비활성 */
+.buy-btn[aria-disabled="true"],
+.buy-btn:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* 모션 최소화 */
+@media (prefers-reduced-motion: reduce) {
+
+    .buy-btn,
+    .buy-btn * {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .buy-btn:active {
+        transform: none;
+    }
+}
+
+/* 다크 모드(선택) */
+@media (prefers-color-scheme: dark) {
+    .buy-btn {
+        --primary-color: #f5f2ef;
+        border-color: #e6e0da33;
+    }
+
+    .buy-btn p {
+        color: var(--primary-color);
+    }
+}

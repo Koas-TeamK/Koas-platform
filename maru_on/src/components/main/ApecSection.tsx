@@ -60,7 +60,7 @@ export default function ApecSection({ lang }: { lang: string }) {
         const prefix = lang?.toLowerCase().split("-")[0] || "en";
         const map: Record<string, "(ko)" | "(en)" | "(zh)"> = { ko: "(ko)", en: "(en)", zh: "(zh)" };
         const suffix = map[prefix] ?? "(en)";
-        return encodeURI(`/img/apec${suffix}.png`);
+        return encodeURI(`/img/apec/apec${suffix}.png`);
     }, [lang]);
 
     return (

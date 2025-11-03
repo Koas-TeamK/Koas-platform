@@ -4,6 +4,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
+                sans: ['Noto Sans KR', 'system-ui', 'sans-serif'],
                 goun: ["GowunDodum", "Noto Sans KR", "sans-serif"]
             },
         },
