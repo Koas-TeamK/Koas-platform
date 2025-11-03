@@ -13,6 +13,7 @@ import { useBodyBgWhileInView } from "@/shared/hooks/useBodyBgWhileInView";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export default function NewsSection() {
+
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -25,6 +26,10 @@ export default function NewsSection() {
             dispatch(newsSummaryRequest());
         }
     }, [data, loading, error, dispatch]);
+
+    //body
+    const sectionRef = useRef<HTMLElement | null>(null);
+    useBodyBgWhileInView(sectionRef, "#afa49d");
 
     // 전환 타이밍
     const DURATION = 900; // ms (교차 페이드 지속시간과 유사하게 사용)
@@ -102,9 +107,6 @@ export default function NewsSection() {
         window.open("https://www.ikoas.com/news/", "_blank", "noopener,noreferrer");
     }, []);
 
-    //body
-    const sectionRef = useRef<HTMLElement | null>(null);
-    useBodyBgWhileInView(sectionRef, "#afa49d");
 
     // 수동 제어 (중복 트리거 방지)
     const canSlide = len > 1 && !isSliding;
@@ -147,7 +149,11 @@ export default function NewsSection() {
     } as const;
 
     return (
-        <section className="w-full h-full flex flex-col lg:flex-row bg-[#afa49d]" ref={sectionRef}>
+        <section className="w-full h-full 
+        flex flex-col lg:flex-row 
+        bg-[#afa49d]
+        "
+            ref={sectionRef}>
             {/* 왼쪽: News 설명 문구 */}
             <div className="
                 w-full lg:w-1/2 h-full
