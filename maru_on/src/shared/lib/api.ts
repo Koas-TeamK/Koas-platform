@@ -6,7 +6,7 @@ import axios from "axios";
  * - dev: Vite proxy가 /api → http://localhost:8080 으로 포워딩
  * - prod: Vercel rewrites가 /api → http://13.211.211.70:8080 으로 프록시
  */
-const BASE = "/api";
+const BASE = "";
 
 // 공개용(쿠키 불필요)
 export const api = axios.create({
