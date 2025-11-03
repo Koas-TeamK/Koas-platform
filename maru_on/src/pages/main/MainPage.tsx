@@ -26,7 +26,7 @@ const sectionVariants: Variants = {
 
 function SnapSection({ children }: { children: React.ReactNode }) {
     return (
-        <section className="snap-start snap-always h-[100svh] w-full">
+        <section className="snap-start snap-always h-[100svh] w-full overflow-x-hidden [overflow:clip]">
             <motion.div
                 className="h-full w-full"
                 variants={sectionVariants}
@@ -45,38 +45,40 @@ export default function MainPage() {
     const lang = i18n.resolvedLanguage || i18n.language || "en";
 
     return (
-        // 스냅 스크롤 컨테이너
-        <main
-            className="
-            h-[100svh] w-full overflow-y-auto
+        <>
+            {/* // 스냅 스크롤 컨테이너 */}
+            <main
+                className="
+            h-[100svh] w-full overflow-y-auto overflow-x-hidden [overflow:clip] max-w-[100vw]
             snap-y snap-mandatory
             overscroll-contain
             hide-scrollbar
         "
-            // iOS 자연 관성 유지. scrollBehavior는 빼서 스냅만 작동.
-            style={{ WebkitOverflowScrolling: "touch" }}
-        >
+                // iOS 자연 관성 유지. scrollBehavior는 빼서 스냅만 작동.
+                style={{ WebkitOverflowScrolling: "touch" }}
+            >
 
-            {/* 섹션 1 */}
-            <SnapSection>
-                <PurchaseSection />
-            </SnapSection>
+                {/* 섹션 1 */}
+                <SnapSection>
+                    <PurchaseSection />
+                </SnapSection>
 
-            {/* 섹션 2 */}
-            <SnapSection>
-                <CatalogSection lang={lang} />
-            </SnapSection>
+                {/* 섹션 2 */}
+                <SnapSection>
+                    <CatalogSection lang={lang} />
+                </SnapSection>
 
-            {/* 섹션 3 */}
-            <SnapSection>
-                <ApecSection lang={lang} />
-            </SnapSection>
+                {/* 섹션 3 */}
+                <SnapSection>
+                    <ApecSection lang={lang} />
+                </SnapSection>
 
-            {/* 섹션 4 */}
-            <SnapSection>
-                <NewsSection />
-            </SnapSection>
+                {/* 섹션 4 */}
+                <SnapSection>
+                    <NewsSection />
+                </SnapSection>
 
-        </main>
+            </main>
+        </>
     );
 }

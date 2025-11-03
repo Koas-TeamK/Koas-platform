@@ -55,7 +55,7 @@ export default function ApecSection({ lang }: { lang: string }) {
         <section
             onClick={onSectionClick}
             className={[
-                "relative w-full min-h-[100svh]",
+                "relative w-full min-h-[100svh]  overflow-hidden [overflow:clip]",
                 "bg-[#1E2950]",
             ].join(" ")}
             aria-label="APEC Leaflet Section"
@@ -64,10 +64,10 @@ export default function ApecSection({ lang }: { lang: string }) {
         >
             {/* 배경: 단청 (뒤로) */}
             <div
-                className="absolute -inset-60 z-10 bg-no-repeat pointer-events-none"
+                className="absolute inset-0 z-10 bg-no-repeat pointer-events-none"
                 style={{
                     backgroundImage: "url('/img/apec/danchung.png')",
-                    backgroundPosition: "center -200px", // ← 위쪽 200px 잘림
+                    backgroundPosition: "center -400px", // ← 위쪽 200px 잘림
                 }}
             ></div>
 
