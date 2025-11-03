@@ -48,18 +48,14 @@ export default function MainPage() {
         // 스냅 스크롤 컨테이너
         <main
             className="
-        h-[100svh] w-full overflow-y-auto
-        snap-y snap-mandatory
-        overscroll-contain
-        hide-scrollbar
-      "
+            h-[100svh] w-full overflow-y-auto
+            snap-y snap-mandatory
+            overscroll-contain
+            hide-scrollbar
+        "
             // iOS 자연 관성 유지. scrollBehavior는 빼서 스냅만 작동.
             style={{ WebkitOverflowScrolling: "touch" }}
         >
-            {/* 섹션 4 */}
-            <SnapSection>
-                <NewsSection />
-            </SnapSection>
 
             {/* 섹션 1 */}
             <SnapSection>
@@ -76,6 +72,10 @@ export default function MainPage() {
                 <ApecSection lang={lang} />
             </SnapSection>
 
+            {/* 섹션 4 */}
+            <SnapSection>
+                <NewsSection />
+            </SnapSection>
 
         </main>
     );
