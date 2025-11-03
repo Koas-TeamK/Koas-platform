@@ -32,10 +32,14 @@
     "title": {
         "title": "마루ː온",
         "slogan": "품격이 머무는 자리",
-        "desc1": "척추의 곡선을 따라 설계된 S-Line 등판의 <strong>안정된 지지력</strong>",
+        "desc1": "척추의 곡선을 따라 설계된 <strong>S-Line 등판</strong>의 안정된 지지력",
         "desc2": "슬림한 곡선과 <strong>친환경 가죽</strong>이 어우러진 쾌적한 팔걸이",
         "desc3": "무릎의 피로를 줄이는 자연스러운 움직임의 <strong>니 틸트 기능</strong>으로 편안한 착석감",
         "descM": "품격이 머무는 자리",
         "buy": "구매하기"
+    },
+    "news": {
+        "desc": "더 나은 공간을 향한, 코아스의 여정을 전합니다.",
+        "button": "보러가기"
     }
 }

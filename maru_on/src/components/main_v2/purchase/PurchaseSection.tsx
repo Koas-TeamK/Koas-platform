@@ -120,7 +120,7 @@ export default function PurchaseSection() {
                                 </motion.div>
 
                                 {/* 구매 버튼 */}
-                                <motion.div variants={fadeUp} className="w-full flex justify-center sm:justify-start">
+                                <motion.div variants={fadeUp} className="w-full flex justify-center sm:justify-start z-20 lg:mt-5">
                                     <a
                                         href={purchaseLink}
                                         target="_blank"
@@ -192,6 +192,7 @@ export default function PurchaseSection() {
                         relative                         
                         lg:w-1/2 lg:h-full w-full h-1/2
                         select-none
+                        xl:mb-20 lg:mb-15 mb-10
                         //border border-red-500
                     "
                     role="img"
@@ -210,8 +211,8 @@ export default function PurchaseSection() {
                                 exit="exit"
                                 className="
                                 absolute left-1/2 -translate-x-1/2 
-                                bottom-14 sm:bottom-18 md:bottom-20 lg:bottom-22 xl:bottom-24 2xl:bottom-26
-                                2xl:w-[38rem] xl:w-[30rem] lg:w-[29rem] md:w-[27rem] sm:w-[24rem] w-[17rem] h-auto
+                                bottom-15 sm:bottom-19 md:bottom-22 lg:bottom-23 xl:bottom-25 2xl:bottom-27
+                                2xl:w-[38rem] xl:w-[30rem] lg:w-[29rem] md:w-[27rem] sm:w-[24rem] w-[15rem] h-auto
                                 "
                                 draggable={false}
                             />
@@ -228,7 +229,7 @@ export default function PurchaseSection() {
                                 className="
                                 absolute left-1/2 -translate-x-1/2 
                                 bottom-14 sm:bottom-18 md:bottom-20 lg:bottom-22 xl:bottom-24 2xl:bottom-26
-                                2xl:w-[38rem] xl:w-[32rem] lg:w-[29rem] md:w-[27rem] sm:w-[24rem] w-[17rem] h-auto
+                                2xl:w-[38rem] xl:w-[32rem] lg:w-[29rem] md:w-[27rem] sm:w-[24rem] w-[15rem] h-auto
                                 "
                                 draggable={false}
                             />
@@ -236,9 +237,10 @@ export default function PurchaseSection() {
                     </AnimatePresence>
 
                     {/* 전환 컨트롤: 화살표 + 점 (미니멀) */}
-                    <div className="absolute left-1/2 -translate-x-1/2 
+                    <div className="absolute left-1/2 -translate-x-1/2 mt-
                     bottom-4 sm:bottom-8 md:bottom-10 lg:bottom-12 xl:bottom-14 2xl:bottom-16
-                    flex items-center gap-3 sm:gap-4">
+                    flex items-center gap-3 sm:gap-4
+                    //border border-black">
                         {/* prev */}
                         <button
                             type="button"
@@ -256,7 +258,7 @@ export default function PurchaseSection() {
                         </button>
 
                         {/* 점(인디케이터) */}
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2" >
                             <button
                                 type="button"
                                 onClick={showHigh}

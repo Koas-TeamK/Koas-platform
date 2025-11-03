@@ -1,26 +1,34 @@
 // src/shared/lib/api.ts
 import axios from "axios";
 
-const isDev = import.meta.env.DEV;
+/**
+ * 공통: 항상 같은-오리진의 "/api"로만 호출
+ * - dev: Vite proxy가 /api → http://localhost:8080 으로 포워딩
+ * - prod: Vercel rewrites가 /api → http://13.211.211.70:8080 으로 프록시
+ */
+const BASE = "";
 
-// dev: 프록시를 쓰므로 baseURL 비움(상대경로로 전송 → Vite가 포워딩)
-// prod: env의 절대 주소 사용
-const baseURL = isDev
-    ? ""
-    : (import.meta.env.VITE_API_BASE?.replace(/\/$/, "") ?? "");
-
+// 공개용(쿠키 불필요)
 export const api = axios.create({
-    baseURL,
+    baseURL: BASE,
+    withCredentials: false,
+    headers: { Accept: "application/json" },
+});
+
+// 인증용(쿠키/세션 필요할 때만 이 인스턴스 사용)
+export const authApi = axios.create({
+    baseURL: BASE,
     withCredentials: true,
     headers: { Accept: "application/json" },
 });
 
-api.interceptors.response.use(
-    (r) => r,
-    (err) => {
-        if (err?.response?.status === 401) {
-            console.warn("[API] 401 unauthorized");
-        }
-        return Promise.reject(err);
+// 공통 응답 인터셉터(필요 시 확장)
+const onRejected = (err: any) => {
+    if (err?.response?.status === 401) {
+        console.warn("[API] 401 unauthorized");
     }
-);
+    return Promise.reject(err);
+};
+
+api.interceptors.response.use((r) => r, onRejected);
+authApi.interceptors.response.use((r) => r, onRejected);

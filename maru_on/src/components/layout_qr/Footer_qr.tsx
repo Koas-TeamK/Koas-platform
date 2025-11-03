@@ -33,14 +33,14 @@ export default function Footer_qr() {
                             <img
                                 src={it.src}
                                 alt={it.alt}
-                                className="w-8 sm:w-9 md:w-10 aspect-square object-contain select-none"
+                                className="w-9 sm:w-10 md:w-11 aspect-square object-contain select-none"
                                 draggable={false}
                             />
                         </a>
                     ))}
                 </div>
                 {/* 로고 */}
-                <img src={KoasLogoUrl} alt="KOAS" className="w-20 inline-block align-middle mt-5" />
+                <img src={KoasLogoUrl} alt="KOAS" className="w-18 inline-block align-middle mt-5" />
                 {/* 홈페이지*/}
                 <p className="text-s text-[#eed49d] mt-3">www.team-koas.com  |  +82 2 2163 6000</p>
                 {/* 저작권 */}

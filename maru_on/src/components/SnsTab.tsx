@@ -29,7 +29,7 @@ export default function SnsFab() {
     }, [open, dispatch]);
 
     return (
-        <nav aria-label="Contact quick panel" className="fixed z-[90] right-0 bottom-30">
+        <nav aria-label="Contact quick panel" className="fixed z-[90] right-0 bottom-15">
             <div ref={wrapRef} className="relative">
                 {/* 아이콘: 세로로 위로 */}
                 <div
@@ -70,7 +70,7 @@ export default function SnsFab() {
                     aria-expanded={open}
                     aria-label={open ? "닫기" : "연락하기 열기"}
                     onClick={() => dispatch(toggleSns())}
-                    className="group bg-white/95  px-5 py-4 text-right
+                    className="group bg-white/95  px-4 py-3 text-right
                      hover:shadow-[0_10px_30px_rgba(0,0,0,0.2)] focus:outline-none focus:ring-2 focus:ring-black/10
                      !rounded-none"
                     style={{ borderRadius: 0 }}
@@ -78,7 +78,7 @@ export default function SnsFab() {
                     <div className="flex items-center gap-3">
                         <span className="hidden md:block h-8 w-[3px] bg-black/80" />
                         <div className="leading-tight">
-                            <div className="text-[13px] font-semibold tracking-wide text-black">CONTACT&nbsp;US</div>
+                            <div className="text-[12px] font-semibold tracking-wide text-black">CONTACT&nbsp;US</div>
                         </div>
                     </div>
                 </button>

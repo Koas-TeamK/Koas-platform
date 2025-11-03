@@ -58,3 +58,34 @@ body {
   height: 100%;
   min-height: 100svh;
 }
+
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* iOS 툴바 변화에도 높이 고정 */
+:root {
+  --vh: 1vh;
+}
+
+.vhfix {
+  min-height: calc(var(--vh) * 100);
+}
+
+/* 스냅 컨테이너 튕김 방지 */
+.snap-container {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* 사파리에서 깔끔한 가로 클립 */
+.overflow-clip {
+  overflow-x: clip;
+}
