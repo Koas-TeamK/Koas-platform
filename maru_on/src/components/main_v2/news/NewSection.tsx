@@ -205,6 +205,9 @@ export default function NewsSection() {
                             bg-white/80 rounded-md
                             px-5 py-10
                             outline-none
+                            tracking-[-0.02em]
+                            shadow-lg shadow-black/50
+                            overflow-hidden
                         "
                         role="button"
                         tabIndex={0}
