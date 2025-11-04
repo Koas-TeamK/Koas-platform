@@ -54,7 +54,7 @@ function* handleNewsSummaryRequest() {
 
         yield put(newsSummarySuccess(list));
     } catch (err: any) {
-        console.error("[뉴스 요약 오류]", err);
+        //console.error("[뉴스 요약 오류]", err);
         const msg =
             err?.response?.data?.message ??
             err?.message ??
