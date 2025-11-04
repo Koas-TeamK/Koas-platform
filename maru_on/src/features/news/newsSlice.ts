@@ -11,6 +11,7 @@ export type NewsSummaryItem = {
     date: string;
     link: string;
 };
+
 export type NewsSummary = NewsSummaryItem[];
 
 // 상세(백엔드 DTO와 맞춤)

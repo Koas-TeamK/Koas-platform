@@ -6,11 +6,14 @@ import { all, fork } from "redux-saga/effects";
 import uiReducer from "@/features/ui/uiSlice";
 import newsReducer from "@/features/news/newsSlice";
 import { newsSaga } from "@/features/news/newsSaga";
+import serialReducer from "@/features/serial/serialSlice";
+import { serialSaga } from "@/features/serial/serialSaga";
 
 // 1) 루트 사가를 이 파일 안에 선언
 function* rootSaga() {
     yield all([
-        fork(newsSaga)
+        fork(newsSaga),
+        fork(serialSaga)
     ]);
 }
 
@@ -22,6 +25,7 @@ export const store = configureStore({
     reducer: {
         ui: uiReducer,
         news: newsReducer,
+        serial: serialReducer,
     },
     middleware: (getDefault) => getDefault({ thunk: false }).concat(sagaMiddleware),
     devTools: import.meta.env.DEV,

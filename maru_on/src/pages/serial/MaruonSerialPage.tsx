@@ -1,33 +1,27 @@
 // src/pages/MaruonSerialPage.tsx
 import './MaruonSerialPage.module.css'
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { parseNameSerialToken } from "@/shared/lib/qr";
 import { Trans, useTranslation } from "react-i18next";
 import { usePageTheme } from "@/shared/hooks/usePageTheme";
+import { qrCheckRequest } from '@/features/serial/serialSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from "@/app/store";
 
 export default function MaruonSerialPage() {
     usePageTheme("#403736");
     const { name, serial, token } = useMemo(() => parseNameSerialToken(), []);
     const { i18n } = useTranslation("common");
+    const dispatch = useDispatch();
+    const { loading, data } = useSelector((s: RootState) => s.serial);
 
-    const [serialNum, setSerialNum] = useState<string | number | null>(null);
-    const [date, setDate] = useState<string | number | null>(null);
-
+    // QR 정도 가져오기
     useEffect(() => {
         if (!name || !serial || !token) return;
-        (async () => {
-            try {
-                const qs = new URLSearchParams({ name, serial, token }).toString();
-                const url = `http://13.211.211.70:8080/api/qr/check?${qs}`;
-                const res = await fetch(url, { headers: { Accept: "application/json" } });
-                if (!res.ok) return;
-                const json = await res.json();
-                setSerialNum(json?.serial ?? null);
-                setDate(json?.createdDate ?? null);
-            } catch { }
-        })();
-    }, [name, serial, token]);
+        dispatch(qrCheckRequest({ name, serial, token }));
+    }, [name, serial, token, dispatch]);
 
+    // Num 정규화
     function formatSerialKeepZeros(v: string | number | null | undefined) {
         if (v == null) return "—";
         const s = String(v).replace(/[０-９]/g, ch =>
@@ -37,6 +31,7 @@ export default function MaruonSerialPage() {
         return m ? m[0] : "—";
     }
 
+    // 날짜 정규화
     function formatDateYMDDots(v: string | number | null | undefined) {
         if (v == null) return "—";
         const s = String(v).trim();
@@ -51,6 +46,10 @@ export default function MaruonSerialPage() {
         const m = s.match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
         if (m) return `${m[1]}.${m[2].padStart(2, "0")}.${m[3].padStart(2, "0")}`;
         return s;
+    }
+
+    if (loading) {
+        return;
     }
 
     return (
@@ -85,7 +84,7 @@ export default function MaruonSerialPage() {
                                                 [-webkit-text-stroke:1px_rgba(0,0,0,.18)]
                                                 [font-family:'Cinzel',serif]"
                                         >
-                                            {formatSerialKeepZeros(serialNum)}
+                                            {formatSerialKeepZeros(data?.serial)}
                                         </span>
                                     ),
                                 }}
@@ -104,7 +103,7 @@ export default function MaruonSerialPage() {
                 </section>
 
                 {/* 배송예정일 */}
-                {date && (
+                {data?.createdDate && (
                     <div className="text-center text-[#eed49d] text-xl pb-30">
                         <Trans
                             i18nKey="edition.date"
@@ -119,7 +118,7 @@ export default function MaruonSerialPage() {
                                             [-webkit-text-stroke:1px_rgba(0,0,0,.18)]
                                             [font-family:'Cinzel',serif]"
                                     >
-                                        {formatDateYMDDots(date)}
+                                        {formatDateYMDDots(data?.createdDate)}
                                     </span>
                                 ),
                             }}
