@@ -31,23 +31,6 @@ export default function MaruonSerialPage() {
         return m ? m[0] : "—";
     }
 
-    // 날짜 정규화
-    function formatDateYMDDots(v: string | number | null | undefined) {
-        if (v == null) return "—";
-        const s = String(v).trim();
-        let d = new Date(s);
-        if (Number.isFinite(Number(s))) d = new Date(Number(s));
-        if (!Number.isNaN(d.getTime())) {
-            const yyyy = d.getFullYear();
-            const mm = String(d.getMonth() + 1).padStart(2, "0");
-            const dd = String(d.getDate()).padStart(2, "0");
-            return `${yyyy}.${mm}.${dd}`;
-        }
-        const m = s.match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
-        if (m) return `${m[1]}.${m[2].padStart(2, "0")}.${m[3].padStart(2, "0")}`;
-        return s;
-    }
-
     if (loading) {
         return;
     }
@@ -101,30 +84,6 @@ export default function MaruonSerialPage() {
                         loading="lazy"
                     />
                 </section>
-
-                {/* 배송예정일 */}
-                {data?.createdDate && (
-                    <div className="text-center text-[#eed49d] text-xl pb-30">
-                        <Trans
-                            i18nKey="edition.date"
-                            ns="common"
-                            key={`date-${i18n.language}`}
-                            components={{
-                                br: <br />,
-                                date: (
-                                    <span
-                                        className="inline-block text-4xl leading-[2.2] tracking-[0.02em]
-                                            text-transparent bg-clip-text [text-shadow:0_0_0_#e6c981]
-                                            [-webkit-text-stroke:1px_rgba(0,0,0,.18)]
-                                            [font-family:'Cinzel',serif]"
-                                    >
-                                        {formatDateYMDDots(data?.createdDate)}
-                                    </span>
-                                ),
-                            }}
-                        />
-                    </div>
-                )}
             </div>
         </div>
     );
