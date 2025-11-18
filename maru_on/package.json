@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "postinstall": "git config remote.origin.url https://github.com/Koas-TeamK/Maruon_Front.git && git lfs pull",
+    "copy-lfs-files": "cp -r maru_on/public/calmStand/ /vercel/path0/public",
+    "prebuild": "npm run copy-lfs-files",
     "lint": "eslint .",
     "preview": "vite preview"
   },
