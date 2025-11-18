@@ -40,7 +40,6 @@ export default function MaruonSerialPage() {
             <div className="pointer-events-none w-full h-full bg-[url('/img/background/background-log.png')] bg-no-repeat bg-top bg-[length:280px_auto] md:bg-[length:320px_auto] lg:bg-[length:360px_auto]">
                 <div className='w-full h-[60px]' />
                 <section className="w-full min-h-[80svh] px-6 grid justify-items-center items-center grid-rows-[auto_1fr_auto_1fr_auto]">
-
                     {/* 로고 */}
                     <img
                         src="/logo/maruon-gold.png"
