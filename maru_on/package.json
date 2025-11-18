@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "postinstall": "git lfs pull",
+    "postinstall": "git config remote.origin.url https://github.com/Koas-TeamK/Maruon_Front.git && git lfs pull",
     "lint": "eslint .",
     "preview": "vite preview"
   },
