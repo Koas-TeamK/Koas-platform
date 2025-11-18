@@ -19,7 +19,7 @@ export default function AppRoutes() {
                     <Route path="/maruon/:serial" element={<MaruonSerialPage />} />
                     <Route path="/maruon/serial=:serial" element={<MaruonSerialPage />} />
                 </Route>
-                <Route element={<AppLayout />}>
+                <Route >
                     <Route path="/calmStand" element={<CalmStandPage />} />
                 </Route>
             </Routes>

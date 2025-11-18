@@ -25,7 +25,7 @@ export default function ProductViewer() {
         // 캔버스 컴포넌트: 3D 렌더링이 일어날 DOM 요소를 정의합니다.
         <Canvas
             // 카메라 위치 설정 (x, y, z)
-            camera={{ position: [2, 2, 2], fov: 75 }}
+            camera={{ position: [2, 2, 2], fov: 10 }}
             style={{ width: '100%', height: '500px', background: '#ffffffff' }}
         >
             {/* Suspense는 모델 로딩이 완료될 때까지 기다립니다. */}
