@@ -4,7 +4,6 @@ import AppLayout from "@/shared/ui/AppLayout";
 import AppLayout_QR from "@/shared/ui/AppLayout_QR";
 import MainPage from "@/pages/main/MainPage";
 import MaruonSerialPage from "@/pages/serial/MaruonSerialPage";
-import CalmStandPage from "@/pages/calmStand/CalmStandPage";
 
 export default function AppRoutes() {
     return (
@@ -19,7 +18,6 @@ export default function AppRoutes() {
                     <Route path="/maruon/:serial" element={<MaruonSerialPage />} />
                     <Route path="/maruon/serial=:serial" element={<MaruonSerialPage />} />
                 </Route>
-                <Route path="/calmStand" element={<CalmStandPage />} />
             </Routes>
         </BrowserRouter>
     );
