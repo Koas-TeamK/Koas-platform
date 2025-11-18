@@ -46,7 +46,7 @@ export default function ProductViewer() {
                 <Environment preset="city" />
 
                 {/* ✨ 제품 모델 로드 */}
-                <ProductModel url="/calmStand/CES_1.glb" />
+                <ProductModel url="/calmStand/CES.glb" />
 
                 {/* ✨ 카메라 컨트롤: 마우스로 모델을 회전/줌 할 수 있게 해줍니다. */}
                 <OrbitControls enableZoom={true} />
