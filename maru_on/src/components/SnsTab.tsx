@@ -41,7 +41,7 @@ export default function SnsFab() {
                       transition-all duration-200`}
                 >
                     {[
-                        { src: wechatSrc, alt: "WeChat", href: "#" },
+                        { src: wechatSrc, alt: "WeChat", href: "https://mp.weixin.qq.com/s/UjTRWkVtEEtINisMMWyxqw" },
                         { src: lineSrc, alt: "LINE", href: "https://line.me/R/ti/p/@761haror" },
                         { src: linkedinSrc, alt: "LinkedIn", href: "https://www.linkedin.com/company/koas/" },
                         { src: facebookSrc, alt: "Facebook", href: "https://www.facebook.com/people/코아스/61568079908788/" }

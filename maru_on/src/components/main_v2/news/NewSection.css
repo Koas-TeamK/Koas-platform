@@ -131,15 +131,3 @@
         transform: none;
     }
 }
-
-/* 다크 모드(선택) */
-@media (prefers-color-scheme: dark) {
-    .catalog-button {
-        --primary-color: #f5f2ef;
-        border-color: #e6e0da33;
-    }
-
-    .catalog-button p {
-        color: var(--primary-color);
-    }
-}
