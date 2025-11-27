@@ -10,6 +10,7 @@ export default function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
+                {/* 메인 */}
                 <Route element={<AppLayout />}>
                     <Route path="/" element={<MainPage />} />
                 </Route>
@@ -19,6 +20,7 @@ export default function AppRoutes() {
                     <Route path="/maruon/:serial" element={<MaruonSerialPage />} />
                     <Route path="/maruon/serial=:serial" element={<MaruonSerialPage />} />
                 </Route>
+                {/* CalmStand */}
                 <Route >
                     <Route path="/calmStand" element={<CalmStandPage />} />
                 </Route>
