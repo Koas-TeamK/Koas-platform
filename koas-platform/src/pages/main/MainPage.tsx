@@ -7,7 +7,6 @@ import ApecSection from "@/components/main_v2/apec/ApecSection";
 import NewsSection from "@/components/main_v2/news/NewSection";
 import { motion, type Variants } from "framer-motion";
 
-// 섹션 래퍼: 섹션 들어올 때 컨텐츠가 '딱' 등장
 const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 36, filter: "blur(2px)" },
     show: {
@@ -54,7 +53,6 @@ export default function MainPage() {
             overscroll-contain
             hide-scrollbar
         "
-                // iOS 자연 관성 유지. scrollBehavior는 빼서 스냅만 작동.
                 style={{ WebkitOverflowScrolling: "touch" }}
             >
 

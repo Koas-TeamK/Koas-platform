@@ -7,7 +7,6 @@ export default function CalmStandPage() {
             <div className="
                 border border-black/50 rounded-xl p-1
             ">
-                {/* 3D 뷰어가 렌더링될 영역의 크기를 반드시 지정해야 합니다. */}
                 <div style={{ height: '500px', width: '100%', margin: '0 auto' }}>
                     <ProductViewer />
                 </div>
