@@ -1,2 +1,2 @@
-maru_on/public/calmStand/CES.glb filter=lfs diff=lfs merge=lfs -text
+maru_on/public/calmStand/CES_1.glb filter=lfs diff=lfs merge=lfs -text
 koas-platform/public/calmStand/CES.glb filter=lfs diff=lfs merge=lfs -text
