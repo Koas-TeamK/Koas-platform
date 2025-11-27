@@ -10,6 +10,12 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   plugins: [react(), tailwindcss(), svgr()],
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)), } },
+  css: {
+    modules: {
+      scopeBehaviour: 'local',
+    },
+    postcss: './postcss.config.cjs',
+  },
   server: {
     proxy: {
       "/api": {
