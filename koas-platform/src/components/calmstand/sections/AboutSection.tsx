@@ -1,4 +1,4 @@
-import styles from './Detail.module.css';
+import styles from './AboutSection.module.css';
 
 export default function AboutSection() {
     return (
@@ -10,6 +10,11 @@ export default function AboutSection() {
                 Degined to sense.  Built to enhance your well-being. <br />
                 Where posture intelligence meets desktop minimalism.
             </div>
+            <div className={styles.title}>Calm Stand</div>
+            <div className={styles.description}>
+                Adaptive support for every workspace.
+            </div>
+
         </div>
     );
 }
